@@ -9,3 +9,5 @@ NAMA ANGGOTA KELOMPOK 6:
 3.RAFI HANIFA FIKRI (11122147) As Project Manager
 
 4.VONI FEBRIYANTI HELENA (11122463) As Designer
+
+---Website Kasir Kedai Takosai ---
