@@ -1,0 +1,221 @@
+/* CSS EKSTERNAL */
+* {
+  font-family: "poppins";
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+header img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  opacity: 80%;
+}
+header .text-header {
+  z-index: 100;
+  color: crimson;
+  text-align: center;
+  position: relative;
+  top: 45%;
+}
+header .text-header h1 {
+  font-size: 40px;
+  line-height: 32px;
+  margin: 0;
+  padding: 0;
+}
+header .text-header p {
+  font-style: italic;
+}
+.button-hero {
+  line-height: 60px;
+  height: 40px;
+  background-color: #151956;
+  padding: 12px 32px 12px 32px;
+  border-radius: 4px;
+  font-weight: bold;
+  transition-duration: 0.4;
+  color: #f4f4f4;
+  text-decoration: none;
+}
+.button-hero:hover {
+  transition-duration: 0.4;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+/* Section 1 */
+section {
+  padding-left: 80px;
+  padding-right: 80px;
+}
+section .text-about {
+  padding-top: 64px;
+}
+section .text-about h2 {
+  font-size: 32px;
+  text-align: center;
+  font-weight: bold;
+  color: crimson;
+}
+section .about-capt {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-align: justify;
+}
+section .about-capt p {
+  font-size: 18px;
+  margin-right: 20px;
+  letter-spacing: 1px;
+}
+section .about-capt img {
+  width: 40%;
+  margin: 20px;
+  border-radius: 4%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+section h2:after {
+  content: "";
+  border-bottom: 5px solid #626262;
+  border-radius: 4px;
+  width: 60px;
+  display: block;
+
+  margin: 5px auto;
+}
+section .benefits {
+  width: 1000px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: start;
+  margin-top: 80px;
+}
+/* Section 2 */
+section .text-menu {
+  margin-top: 80px;
+}
+section .text-menu h2 {
+  font-size: 32px;
+  text-align: center;
+  font-weight: bold;
+  color: crimson;
+}
+section .text-menu h3 {
+  margin-left: 2%;
+  font-size: 30px;
+  color: crimson;
+  margin-bottom: 20px;
+}
+section .makanan-img {
+  text-align: center;
+}
+section .minuman-img {
+  text-align: center;
+}
+/* Section 3 */
+section .text-outlets {
+  margin-top: 80px;
+}
+section .text-outlets h2 {
+  font-size: 32px;
+  text-align: center;
+  font-weight: bold;
+  color: crimson;
+}
+/* Section 4 */
+section .text-gallery {
+  margin-top: 80px;
+}
+section .text-gallery h2 {
+  font-size: 32px;
+  text-align: center;
+  font-weight: bold;
+  color: crimson;
+}
+section .gallery-img {
+  text-align: center;
+}
+
+.dokum h6 {
+  margin: 0px;
+  margin-top: 10px;
+  padding: 0px;
+  font-size: 16px;
+  font-weight: 700;
+  color: crimson;
+}
+.dokum div {
+  text-align: center;
+  width: 30%;
+}
+footer {
+  height: 120px;
+  margin-top: 80px;
+  padding-left: 100px;
+  padding-right: 100px;
+  background-color: crimson;
+}
+footer .straight {
+  padding-top: 40px;
+  border-bottom: 5px solid #f4f4f4;
+
+  border-radius: 2px;
+}
+footer .text-footer {
+  text-align: center;
+  font-size: 18px;
+  color: #f4f4f4;
+}
+.container {
+  max-width: 1170px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+body {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+
+.logo {
+  height: 45px;
+  margin-top: 13px;
+}
+nav {
+  width: 100%;
+  height: 75px;
+  background-color: rgba(0, 178, 216, 0.5);
+  opacity: 0.6;
+  top: 0;
+  left: 0;
+  position: fixed;
+}
+.nav-left {
+  float: left;
+}
+.nav-right {
+  float: right;
+}
+.nav-right a {
+  line-height: 75px;
+  font-weight: bold;
+  position: relative;
+  z-index: 9999;
+}
