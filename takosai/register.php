@@ -1,10 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
     <title>Registrasi | Kedai Takosai</title>
@@ -273,13 +271,11 @@
   </head>
   <body>
 
-  <!-- Decorative elements -->
   <div class="decoration">🍡</div>
   <div class="decoration">🥟</div>
   <div class="decoration">🍹</div>
   <div class="decoration">🍜</div>
  
-  <!-- Form Registrasi -->
   <div class="container">
     <h3>HALAMAN REGISTRASI</h3>
     <div class="card p-5 mb-5">
@@ -288,6 +284,11 @@
           <div class="form-group col-md-6">
             <label for="user">Username</label>
             <input type="text" class="form-control" id="user" name="username" placeholder="Masukkan username" required>
+            
+            <small id="username-error" class="form-text text-danger" style="display:none; font-weight:bold; margin-top:5px;">
+              <i class="fas fa-exclamation-circle mr-1"></i>Username sudah ada! Gunakan yang lain.
+            </small>
+            
           </div>
           <div class="form-group col-md-6">
             <label for="pass">Password</label>
@@ -319,15 +320,12 @@
       </form>
     </div>
   </div>
-  <!-- Akhir Form Registrasi -->
-
-  <!-- Optional JavaScript -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   
-  <!-- Password Validation Script -->
   <script>
+    // 1. Password Validation (Kode Lama Kamu)
     document.getElementById('registerForm').addEventListener('submit', function(e) {
       const password = document.getElementById('pass').value;
       const confirmPassword = document.getElementById('pass_confirm').value;
@@ -346,7 +344,6 @@
       }
     });
 
-    // Real-time validation
     document.getElementById('pass_confirm').addEventListener('input', function() {
       const password = document.getElementById('pass').value;
       const confirmPassword = this.value;
@@ -359,6 +356,44 @@
         errorMessage.style.display = 'none';
         this.style.borderColor = '#D8C38D';
       }
+    });
+
+    // 2. [NEW] Username Validation (Real-time dengan AJAX)
+    const userInput = document.getElementById('user');
+    const userError = document.getElementById('username-error');
+    const submitBtn = document.querySelector('button[name="register"]');
+
+    userInput.addEventListener('input', function() {
+        const username = this.value;
+
+        if (username !== "") {
+            const formData = new FormData();
+            formData.append('username', username);
+
+            // Kirim ke cek_username.php
+            fetch('cek_username.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data.trim() === 'ada') {
+                    // Jika Username Ada
+                    userError.style.display = 'block';
+                    userInput.style.borderColor = '#E5A3A3'; // Warna Merah
+                    submitBtn.disabled = true; // Matikan tombol submit
+                } else {
+                    // Jika Username Aman
+                    userError.style.display = 'none';
+                    userInput.style.borderColor = '#D8C38D'; // Warna Normal
+                    submitBtn.disabled = false; // Hidupkan tombol submit
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        } else {
+            userError.style.display = 'none';
+            userInput.style.borderColor = '#D8C38D';
+        }
     });
   </script>
   </body>
