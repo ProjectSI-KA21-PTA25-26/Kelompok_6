@@ -1,12 +1,50 @@
-<?php 
+<?php
 session_start();
+include('koneksi.php');
+
+if(!isset($_SESSION['username'])) {
+    header("location: index.php");
+    exit;
+}
+
 $id_menu = $_GET['id_menu'];
 
-if (isset($_SESSION['pesanan'][$id_menu])){
-	$_SESSION['pesanan'][$id_menu]+=1;
-}else{
-	$_SESSION['pesanan'][$id_menu]=1;
+// Ambil data menu untuk cek stok
+$query = mysqli_query($conn, "SELECT * FROM menu WHERE id_menu='$id_menu'");
+$menu = mysqli_fetch_assoc($query);
+$stok_tersedia = isset($menu['stok']) ? $menu['stok'] : 0;
+
+// Cek apakah menu sudah ada di keranjang
+$qty_di_keranjang = isset($_SESSION["pesanan"][$id_menu]) ? $_SESSION["pesanan"][$id_menu] : 0;
+
+// Validasi stok
+if($stok_tersedia <= 0) {
+    echo "<script>alert('Maaf, stok habis!');location='menu_pembeli.php'</script>";
+    exit;
 }
+
+if($qty_di_keranjang >= $stok_tersedia) {
+    echo "<script>alert('Maaf, stok tidak mencukupi! Stok tersedia: $stok_tersedia');location='menu_pembeli.php'</script>";
+    exit;
+}
+
+// Tambahkan ke keranjang
+if(!isset($_SESSION["pesanan"])) {
+    $_SESSION["pesanan"] = array();
+}
+
+if(isset($_SESSION["pesanan"][$id_menu])) {
+    $_SESSION["pesanan"][$id_menu]++;
+} else {
+    $_SESSION["pesanan"][$id_menu] = 1;
+}
+
+// Set session untuk notifikasi sukses
+$_SESSION['cart_notification'] = "Item berhasil ditambahkan ke keranjang!";
+
+// Redirect kembali ke menu dengan fragment untuk smooth scroll
+header("location: menu_pembeli.php#added");
+exit;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +52,7 @@ if (isset($_SESSION['pesanan'][$id_menu])){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tambah Pesanan</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloSudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
       margin: 0;
