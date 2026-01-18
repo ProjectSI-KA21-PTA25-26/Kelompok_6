@@ -114,6 +114,10 @@ if(!isset($_SESSION['username'])) {
       content: '🏷️ ';
     }
 
+    label[for="stok1"]::before {
+      content: '📦 ';
+    }
+
     /* Style untuk option pertama (placeholder) */
     select.form-control option:first-child {
       color: #A18182;
@@ -127,7 +131,7 @@ if(!isset($_SESSION['username'])) {
     .form-control, select.form-control {
       border: 2px solid #D8C38D;
       border-radius: 10px;
-      padding: 1px 15px;
+      padding: 12px 15px;
       transition: all 0.3s ease;
       background: white;
       color: #3B2F2F;
@@ -297,6 +301,11 @@ if(!isset($_SESSION['username'])) {
           </select>
         </div>
         <div class="form-group">
+          <label for="stok1">Stok Tersedia</label>
+          <input type="number" class="form-control" id="stok1" name="stok" placeholder="Contoh: 50" min="0" required>
+          <small class="form-text text-muted">Masukkan jumlah stok yang tersedia</small>
+        </div>
+        <div class="form-group">
           <label for="gambar">Foto Menu</label>
           <input type="file" class="form-control-file border" id="gambar" name="gambar" accept="image/*" required>
           <small class="form-text text-muted">Format: JPG, PNG, JPEG (Max 2MB)</small>
@@ -318,6 +327,7 @@ if(!isset($_SESSION['username'])) {
           $nama = mysqli_real_escape_string($conn, $_POST['nama_menu']);
           $harga = mysqli_real_escape_string($conn, $_POST['harga']);
           $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
+          $stok = mysqli_real_escape_string($conn, $_POST['stok']);
           
           $nama_file = $_FILES['gambar']['name'];
           $source = $_FILES['gambar']['tmp_name'];
@@ -331,8 +341,8 @@ if(!isset($_SESSION['username'])) {
               $id_menu = $row['max_id'] + 1;
               
               // Simpan ke database
-              $insert = mysqli_query($conn, "INSERT INTO menu (id_menu, nama_menu, harga, kategori, gambar) 
-                                             VALUES ($id_menu, '$nama', '$harga', '$kategori', '$nama_file')");
+              $insert = mysqli_query($conn, "INSERT INTO menu (id_menu, nama_menu, harga, kategori, stok, gambar) 
+                                             VALUES ($id_menu, '$nama', '$harga', '$kategori', '$stok', '$nama_file')");
               if($insert){
                   echo "<script>alert('Menu berhasil ditambahkan!'); window.location='daftar_menu.php';</script>";
               } else {
