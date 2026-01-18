@@ -122,6 +122,10 @@ $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
       content: '💰 ';
     }
 
+    label[for="stok1"]::before {
+      content: '📦 ';
+    }
+
     /* Form Controls */
     .form-control {
       border: 2px solid #D8C38D;
@@ -301,6 +305,12 @@ $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
         <div class="form-group">
           <label for="harga1">Harga Menu</label>
           <input type="number" class="form-control" id="harga1" name="harga" value="<?php echo $result[0]['harga'] ?>" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="stok1">Stok Tersedia</label>
+          <input type="number" class="form-control" id="stok1" name="stok" value="<?php echo $result[0]['stok'] ?>" min="0" required>
+          <small class="form-text text-muted">Update jumlah stok yang tersedia</small>
         </div>
         
         <div class="form-group">
