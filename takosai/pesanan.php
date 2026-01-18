@@ -27,27 +27,56 @@ if(!isset($_SESSION['username'])) {
     /* ========== Background & Navbar - Matching dengan menu_pembeli.php ========== */
     
     /* Background halaman: netral hangat yang mendukung palet kartu */
+   /* =========================================
+     1. DEFAULT (Tampilan Laptop/PC)
+     ========================================= */
+  .banner-hero {
+    width: 100%;
+    height: 275px; /* Tinggi standar laptop */
+    background-image: url('img/takosai.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .banner-hero h1 {
+    color: white;
+    font-size: 3rem;
+    font-weight: 800;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.6);
+  }
+
+  /* =========================================
+     2. KHUSUS TABLET (iPad / Tab)
+     Rentang: 768px - 1024px
+     ========================================= */
+  @media (min-width: 768px) and (max-width: 1024px) {
     .banner-hero {
-  width: 100%;
-  height: 275px;
-  background-image: url('img/takosai.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 0 0 20px 20px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+      height: 50vh !important;       /* Setengah layar tablet */
+      min-height: 400px !important;  /* Minimal 400px biar gambar gak kepotong */
+      background-position: center center !important;
+    }
+  }
 
-.banner-hero h1 {
-  color: white;
-  font-size: 3rem;
-  font-weight: 800;
-  text-shadow: 3px 3px 10px rgba(0,0,0,0.6);
-}
-
+  /* =========================================
+     3. KHUSUS HP (Mobile)
+     Rentang: Di bawah 768px
+     ========================================= */
+  @media (max-width: 767.98px) {
+    .banner-hero {
+      height: 100vh !important; /* Full layar HP */
+      border-radius: 0;         /* Hilangkan lengkungan bawah */
+    }
+    
+    .banner-hero h1 {
+        font-size: 2rem;        /* Kecilkan font judul di HP */
+    }
+  }
     body {
       background: linear-gradient(180deg, #FBF6EE 0%, #F2E6CF 50%, #E9D9BF 100%);
       color: #3B2F2F;
@@ -276,28 +305,205 @@ if(!isset($_SESSION['username'])) {
       }
     }
 
+    /* ========== BEST SELLER SECTION ========== */
+    .bestseller-section {
+      margin-top: 60px;
+      margin-bottom: 60px;
+    }
+
+    .bestseller-header {
+      color: #7A5F5F;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      padding: 25px;
+      background: linear-gradient(135deg, rgba(161, 129, 130, 0.15) 0%, rgba(216, 195, 141, 0.15) 100%);
+      border-radius: 20px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      border: 2px solid rgba(161, 129, 130, 0.2);
+    }
+
+    .bestseller-header h3::before {
+      content: '🏆 ';
+      font-size: 2rem;
+      margin-right: 10px;
+    }
+
+    .bestseller-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      margin-bottom: 25px;
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .bestseller-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    }
+
+    .bestseller-card.rank-1 {
+      border-color: #FFD700;
+      background: linear-gradient(135deg, #FFF9E6 0%, white 100%);
+    }
+
+    .bestseller-card.rank-2 {
+      border-color: #C0C0C0;
+      background: linear-gradient(135deg, #F5F5F5 0%, white 100%);
+    }
+
+    .bestseller-card.rank-3 {
+      border-color: #CD7F32;
+      background: linear-gradient(135deg, #FFF4E6 0%, white 100%);
+    }
+
+    .rank-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.3rem;
+      z-index: 10;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .rank-badge.gold {
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      color: white;
+    }
+
+    .rank-badge.silver {
+      background: linear-gradient(135deg, #E0E0E0 0%, #B0B0B0 100%);
+      color: #333;
+    }
+
+    .rank-badge.bronze {
+      background: linear-gradient(135deg, #CD7F32 0%, #8B4513 100%);
+      color: white;
+    }
+
+    .rank-badge.regular {
+      background: linear-gradient(135deg, #A18182 0%, #8B6F70 100%);
+      color: white;
+    }
+
+    .bestseller-image {
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .bestseller-body {
+      padding: 20px;
+    }
+
+    .bestseller-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #4A3B2A;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .bestseller-kategori {
+      display: inline-block;
+      background: #D8C38D;
+      color: #4A3B2A;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .bestseller-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 10px;
+      background: rgba(216, 195, 141, 0.2);
+      border-radius: 10px;
+    }
+
+    .stat-item-icon {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+    }
+
+    .stat-item-value {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #7A5F5F;
+    }
+
+    .stat-item-label {
+      font-size: 0.75rem;
+      color: #5A4036;
+      margin-top: 3px;
+    }
+
     /* Responsive */
-    @media (max-width: 768px) {
+    /* =========================================
+       RESPONSIVE TABLET & MOBILE
+       ========================================= */
+       
+    /* 1. Pengaturan untuk TABLET (dan layar di bawah 992px) */
+    @media (max-width: 991.98px) {
+      /* Judul sedikit mengecil agar muat */
       .judul-pesanan h3 {
-        font-size: 1.5rem;
-        padding: 15px;
+        font-size: 1.75rem;
       }
-
+      
+      /* Font tabel ukuran sedang, biar enak dibaca di Tablet */
       .table {
-        font-size: 0.85rem;
+        font-size: 0.85rem; 
       }
 
+      /* Mencegah teks tabel turun baris (wrap), user tablet bisa scroll ke samping */
+      .table thead th, .table tbody td {
+        white-space: nowrap; 
+      }
+      
+      /* Penyesuaian form filter agar tidak berantakan */
+      .form-inline .form-group {
+        margin-bottom: 10px;
+      }
+    }
+
+    /* 2. Pengaturan KHUSUS HP (Layar kecil di bawah 576px) */
+    @media (max-width: 575.98px) {
+      /* Font tabel lebih kecil lagi khusus HP */
+      .table {
+        font-size: 0.75rem; 
+      }
+      
+      /* Tombol Export & Print jadi Full Width (atas bawah) di HP */
+      .mb-5 .btn {
+        width: 100%;
+        margin-bottom: 10px;
+        display: block;
+      }
+      
+      /* Form filter jadi tumpuk ke bawah */
       .form-inline {
         flex-direction: column;
         align-items: stretch !important;
       }
-
-      .form-inline .form-group {
-        margin-bottom: 10px;
-        width: 100%;
-      }
-
-      .form-inline .btn {
+      .form-inline .form-group, .form-inline .btn {
         width: 100%;
       }
     }
@@ -336,7 +542,7 @@ if(!isset($_SESSION['username'])) {
           <li class="nav-item"><a class="nav-link mr-4" href="menu_pembeli.php">DAFTAR MENU</a></li>
           <li class="nav-item"><a class="nav-link mr-4" href="pesanan_pembeli.php">KERANJANG</a></li>
           <li class="nav-item"><a class="nav-link mr-4" href="daftar_menu.php">EDIT MENU</a></li>
-          <li class="nav-item"><a class="nav-link mr-4" href="pesanan.php">RIWAYAT PESANAN</a></li>
+          <li class="nav-item"><a class="nav-link mr-4" href="pesanan.php">LAPORAN PENJUALAN</a></li>
           <li class="nav-item"><a class="nav-link mr-4" href="logout.php">LOGOUT</a></li>
         </ul>
       </div>
@@ -350,6 +556,8 @@ if(!isset($_SESSION['username'])) {
         
         <?php
 include 'koneksi.php';
+// SET TIMEZONE INDONESIA ✅ ADDED
+date_default_timezone_set('Asia/Jakarta');
 
 // Default query
 $where = "";
@@ -364,9 +572,7 @@ $tahun = $_GET['tahun'] ?? date('Y'); // Default ke tahun sekarang (untuk filter
 
 // Tentukan kondisi WHERE dan judul laporan
 if ($filter == "hari" && !empty($tanggal)) {
-$tgl_start = $tanggal . " 00:00:00";
-    $tgl_end = $tanggal . " 23:59:59";
-    $where = "WHERE t.tanggal_transaksi BETWEEN '$tgl_start' AND '$tgl_end'";
+    $where = "WHERE DATE(t.tanggal_transaksi) = '$tanggal'";
     $judul = "Transaksi Tanggal " . date('d-m-Y', strtotime($tanggal));
 } elseif ($filter == "bulan" && !empty($bulan) && !empty($tahun_bulan)) {
 $where = "WHERE MONTH(t.tanggal_transaksi) = '$bulan' AND YEAR(t.tanggal_transaksi) = '$tahun_bulan'";
@@ -461,62 +667,63 @@ function toggleFilter() {
 </script>
 
       </div>
-      <h5 class="mt-4">📊 <?= $judul ?></h5>
-<table class="table table-bordered table-striped mt-3" id="tabel-penjualan">
-  <thead class="thead-dark">
-  <tr>
-    <th>No</th>
-    <th>Kode Transaksi</th>
-    <th>Nama Pembeli</th>
-    <th>Tanggal Transaksi</th>
-    <th>Nama Menu</th>
-    <th>Metode Pembayaran</th>
-    <th>Harga</th>
-    <th>Jumlah</th>
-    <th>Total Bayar</th>
-  </tr>
-</thead>
-  <tbody>
-    <?php
-$no = 1;
-$total_semua = 0;
-while ($row = mysqli_fetch_assoc($query)) {
-    $kode = $row['kode_transaksi'];
-    $nama_pembeli = $row['nama_pembeli'];
-    $tgl = date('d-m-Y H:i:s', strtotime($row['tanggal_transaksi'] . ' +6 hours'));
-    $nama_menu = $row['nama_menu'];
-    $metode = $row['metode_pembayaran'];
-    $harga = $row['harga'];
-    $qty = $row['qty'];
-    $sub = $row['total_harga'];
+     <h5 class="mt-4">📊 <?= $judul ?></h5>
 
-    $total_semua += $sub;
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped mt-3" id="tabel-penjualan" style="width:100%">
+          <thead class="thead-dark">
+          <tr>
+            <th>No</th>
+            <th>Kode Transaksi</th>
+            <th>Nama Pembeli</th>
+            <th>Tanggal Transaksi</th>
+            <th>Nama Menu</th>
+            <th>Metode Pembayaran</th>
+            <th>Harga</th>
+            <th>Jumlah</th>
+            <th>Total Bayar</th>
+          </tr>
+        </thead>
+          <tbody>
+            <?php
+        $no = 1;
+        $total_semua = 0;
+        while ($row = mysqli_fetch_assoc($query)) {
+            $kode = $row['kode_transaksi'];
+            $nama_pembeli = $row['nama_pembeli'];
+            $tgl = date('d-m-Y H:i:s', strtotime($row['tanggal_transaksi'] . ' +6 hours'));
+            $nama_menu = $row['nama_menu'];
+            $metode = $row['metode_pembayaran'];
+            $harga = $row['harga'];
+            $qty = $row['qty'];
+            $sub = $row['total_harga'];
 
-    echo "<tr>
-            <td align='center'>{$no}</td>
-            <td align='center'>{$kode}</td>
-            <td>{$nama_pembeli}</td>
-            <td>{$tgl}</td>
-            <td>{$nama_menu}</td>
-            <td>{$metode}</td>
-            <td align='right'>Rp ".number_format($harga,0,',','.')."</td>
-            <td align='center'>{$qty}</td>
-            <td align='right'>Rp ".number_format($sub,0,',','.')."</td>
-          </tr>";
-    $no++;
-}
+            $total_semua += $sub;
 
-echo "</tbody>
-      <tfoot>
-        <tr class='font-weight-bold'>
-          <td colspan='8' align='center'>💰 TOTAL KESELURUHAN</td>
-          <td align='right'>Rp ". number_format($total_semua,0,',','.') ."</td>
-        </tr>
-      </tfoot>
-      </table>";
+            echo "<tr>
+                    <td align='center'>{$no}</td>
+                    <td align='center'>{$kode}</td>
+                    <td>{$nama_pembeli}</td>
+                    <td>{$tgl}</td>
+                    <td>{$nama_menu}</td>
+                    <td>{$metode}</td>
+                    <td align='right'>Rp ".number_format($harga,0,',','.')."</td>
+                    <td align='center'>{$qty}</td>
+                    <td align='right'>Rp ".number_format($sub,0,',','.')."</td>
+                  </tr>";
+            $no++;
+        }
 
-      ?>
-
+        echo "</tbody>
+              <tfoot>
+                <tr class='font-weight-bold'>
+                  <td colspan='8' align='center'>💰 TOTAL KESELURUHAN</td>
+                  <td align='right'>Rp ". number_format($total_semua,0,',','.') ."</td>
+                </tr>
+              </tfoot>
+              </table>";
+              ?>
+      </div> 
   <div class="mb-5 mt-4">
   <a href="export_excel.php?filter=<?= $filter ?>&tanggal=<?= $tanggal ?>&bulan=<?= $bulan ?>&tahun_bulan=<?= $tahun_bulan ?>&tahun=<?= $tahun ?>" 
    class="btn btn-success">
@@ -527,17 +734,125 @@ echo "</tbody>
     </div>
   <!-- Akhir Menu -->
 
+  <!-- ========== BEST SELLER SECTION ========== -->
+  <?php
+  // Query untuk mendapatkan menu terlaris berdasarkan filter yang sama
+  $sql_bestseller = "
+  SELECT 
+      m.id_menu,
+      m.nama_menu,
+      m.kategori,
+      m.harga,
+      m.gambar,
+      SUM(d.qty) AS total_terjual,
+      COUNT(DISTINCT t.kode_transaksi) AS jumlah_transaksi,
+      SUM(d.total_harga) AS total_pendapatan
+  FROM detailtransaksi d
+  JOIN menu m ON d.id_menu = m.id_menu
+  JOIN transaksi t ON d.kode_transaksi = t.kode_transaksi
+  $where
+  GROUP BY m.id_menu, m.nama_menu, m.kategori, m.harga, m.gambar
+  ORDER BY total_terjual DESC
+  LIMIT 10
+  ";
 
+  $query_bestseller = mysqli_query($conn, $sql_bestseller);
+  $data_bestseller = [];
+  while($row_bs = mysqli_fetch_assoc($query_bestseller)) {
+      $data_bestseller[] = $row_bs;
+  }
 
-  <!-- Footer -->
-  <hr class="footer">
-  <div class="container">
-    <div class="row footer-body">
-      <div class="col-md-6">
-        <p><strong>Copyright</strong> <i class="far fa-copyright"></i> 2025 - Designed by Kelompok 6 Kelas 4KA21</p>
+  if(count($data_bestseller) > 0):
+  ?>
+  <div class="container bestseller-section">
+      <div class="bestseller-header">
+          <h3 class="text-center font-weight-bold">MENU BEST SELLER</h3>
+          <p class="text-center mb-0" style="color: #7A5F5F; font-size: 1.1rem;">
+              <?= $judul ?> - Top <?= count($data_bestseller) ?> Menu Terlaris
+          </p>
       </div>
-    </div>
+
+      <div class="row">
+          <?php 
+          $rank = 1;
+          foreach($data_bestseller as $menu_bs): 
+              $rank_class = '';
+              $badge_class = 'regular';
+              
+              if($rank == 1) {
+                  $rank_class = 'rank-1';
+                  $badge_class = 'gold';
+              } elseif($rank == 2) {
+                  $rank_class = 'rank-2';
+                  $badge_class = 'silver';
+              } elseif($rank == 3) {
+                  $rank_class = 'rank-3';
+                  $badge_class = 'bronze';
+              }
+          ?>
+          <div class="col-md-6 col-lg-4 col-xl-3">
+              <div class="bestseller-card <?= $rank_class ?>">
+                  <div class="rank-badge <?= $badge_class ?>">
+                      <?= $rank ?>
+                  </div>
+                  <img src="./img/<?= $menu_bs['gambar'] ?>" class="bestseller-image" alt="<?= $menu_bs['nama_menu'] ?>">
+                  <div class="bestseller-body">
+                      <h5 class="bestseller-title"><?= $menu_bs['nama_menu'] ?></h5>
+                      <div class="text-center">
+                          <span class="bestseller-kategori"><?= ucfirst($menu_bs['kategori']) ?></span>
+                      </div>
+                      
+                      <div class="bestseller-stats">
+                          <div class="stat-item">
+                              <div class="stat-item-icon">🔥</div>
+                              <div class="stat-item-value"><?= $menu_bs['total_terjual'] ?></div>
+                              <div class="stat-item-label">Terjual</div>
+                          </div>
+                          <div class="stat-item">
+                              <div class="stat-item-icon">🛒</div>
+                              <div class="stat-item-value"><?= $menu_bs['jumlah_transaksi'] ?></div>
+                              <div class="stat-item-label">Transaksi</div>
+                          </div>
+                          <div class="stat-item" style="grid-column: 1 / -1;">
+                              <div class="stat-item-icon">💵</div>
+                              <div class="stat-item-value">Rp <?= number_format($menu_bs['total_pendapatan']) ?></div>
+                              <div class="stat-item-label">Total Pendapatan</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <?php 
+          $rank++;
+          if($rank > 8) break; // Tampilkan maksimal 8 card
+          endforeach; 
+          ?>
+      </div>
   </div>
+  <?php endif; ?>
+  <!-- ========== END BEST SELLER SECTION ========== -->
+
+
+  <!-- Awal Footer -->
+      <hr class="footer">
+      <div class="container">
+        <div class="row footer-body">
+          <div class="col-md-6">
+          <div class="copyright">
+            <strong>Copyright</strong> <i class="far fa-copyright"></i> 2025 - Designed by Kelompok 6 Kelas 4KA21
+          </div>
+          </div>
+
+          <div class="col-md-6 d-flex justify-content-end">
+          <div class="icon-contact">
+          <label class="font-weight-bold">Follow Us </label>
+          <a href="#"><img src="img/icon/fb.png" class="mr-3 ml-4" data-toggle="tooltip" title="Facebook"></a>
+          <a href="#"><img src="img/icon/ig.png" class="mr-3" data-toggle="tooltip" title="Instagram"></a>
+          <a href="#"><img src="img/icon/twitter.png" class="" data-toggle="tooltip" title="Twitter"></a>
+        </div>
+          </div>
+        </div>
+      </div>
   <!-- Akhir Footer -->
 
 
