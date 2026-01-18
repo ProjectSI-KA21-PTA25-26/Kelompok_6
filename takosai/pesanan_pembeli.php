@@ -11,6 +11,76 @@ if(empty($_SESSION["pesanan"]) || !isset($_SESSION["pesanan"])) {
   echo "<script>location='menu_pembeli.php'</script>";
   exit;
 }
+
+// Handle Konfirmasi Pesanan
+if (isset($_POST['konfirm'])) {
+    $tgl = date("Y-m-d H:i:s");
+    $nama_pembeli = mysqli_real_escape_string($conn, $_POST['nama_pembeli']);
+    $metode_pembayaran = mysqli_real_escape_string($conn, $_POST['metode_pembayaran']);
+    $username = $_SESSION['username'];
+
+    $cek_max = mysqli_query($conn, "SELECT MAX(kode_transaksi) AS max_id FROM transaksi");
+    $max = $cek_max->fetch_assoc();
+    $kode_trans = $max['max_id'] + 1;
+
+    $insert = mysqli_query($conn, "
+        INSERT INTO transaksi (kode_transaksi, tanggal_transaksi, status, status_kitchen, keterangan, nama_pembeli, metode_pembayaran) 
+        VALUES ($kode_trans, '$tgl', 1, 1, 'Dine In', '$nama_pembeli', '$metode_pembayaran')
+    ");
+
+    if (!$insert) {
+        echo "<div class='alert alert-danger mt-3'>Gagal menyimpan transaksi: " . mysqli_error($conn) . "</div>";
+    } else {
+        // Simpan data untuk struk
+        $struk_data = [
+            'kode_transaksi' => $kode_trans,
+            'nama_pembeli' => $nama_pembeli,
+            'tanggal' => $tgl,
+            'metode_pembayaran' => $metode_pembayaran,
+            'items' => [],
+            'total' => 0
+        ];
+
+        foreach ($_SESSION["pesanan"] as $id_menu => $jumlah) {
+            $query_menu = mysqli_query($conn, "SELECT * FROM menu WHERE id_menu='$id_menu'");
+            $data_menu = $query_menu->fetch_assoc();
+            $harga = $data_menu['harga'];
+            $subtotal = $harga * $jumlah;
+            
+            // Simpan ke array struk
+            $struk_data['items'][] = [
+                'nama' => $data_menu['nama_menu'],
+                'harga' => $harga,
+                'qty' => $jumlah,
+                'subtotal' => $subtotal
+            ];
+            $struk_data['total'] += $subtotal;
+            
+            // Insert detail transaksi
+            mysqli_query($conn, "
+                INSERT INTO detailtransaksi(kode_transaksi, id_menu, harga, qty, total_harga)
+                VALUES ($kode_trans, '$id_menu', $harga, $jumlah, $subtotal)
+            ");
+            
+            // Kurangi stok di tabel menu
+            mysqli_query($conn, "
+                UPDATE menu 
+                SET stok = stok - $jumlah 
+                WHERE id_menu = '$id_menu'
+            ");
+        }
+
+        // Save struk data to session
+        $_SESSION['struk_data'] = $struk_data;
+        
+        // Kosongkan keranjang
+        unset($_SESSION["pesanan"]);
+        
+        // Redirect to struk page
+        echo "<script>window.location.href='struk_pembelian.php';</script>";
+        exit;
+    }
+}
 ?>
 
 <!doctype html>
@@ -518,16 +588,25 @@ if (isset($_POST['konfirm'])) {
 }
 ?>
 
-<!-- Footer -->
-  <hr class="footer">
-  <div class="container">
-    <div class="row footer-body">
-      <div class="col-md-6">
-        <p><strong>Copyright</strong> <i class="far fa-copyright"></i> 2025 - Designed by Kelompok 6 Kelas 4KA21</p>
+<hr class="footer">
+<div class="container">
+  <div class="row footer-body">
+    <div class="col-md-6">
+      <div class="copyright">
+        <strong>Copyright</strong> <i class="far fa-copyright"></i> 2023 - Designed by Kelompok 4 Kelas D
+      </div>
+    </div>
+
+    <div class="col-md-6 d-flex justify-content-end">
+      <div class="icon-contact">
+        <label class="font-weight-bold">Follow Us </label>
+        <a href="#"><img src="img/icon/fb.png" class="mr-3 ml-4" data-toggle="tooltip" title="Facebook"></a>
+        <a href="#"><img src="img/icon/ig.png" class="mr-3" data-toggle="tooltip" title="Instagram"></a>
+        <a href="#"><img src="img/icon/twitter.png" data-toggle="tooltip" title="Twitter"></a>
       </div>
     </div>
   </div>
-  <!-- Akhir Footer -->
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
