@@ -11,3 +11,4 @@ NAMA ANGGOTA KELOMPOK 6:
 4.VONI FEBRIYANTI HELENA (11122463) As Designer
 
 ---Website Kasir Kedai Takosai ---
+Link Project : https://kedaitakosai.infinityfreeapp.com/
