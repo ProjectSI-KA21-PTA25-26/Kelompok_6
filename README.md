@@ -12,7 +12,7 @@ mengelola stok menu (Takoyaki & Dimsum), memproses pembayaran (Cash/QRIS),
 
 serta menyajikan laporan penjualan otomatis untuk pemilik usaha.
 
-## **👥 Anggota Kelompok dan Peran**
+ **👥 Anggota Kelompok dan Peran**
 
 | Nama | NPM | Peran |
 | :---- | :---- | :---- |
