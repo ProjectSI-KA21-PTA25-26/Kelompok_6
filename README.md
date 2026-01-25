@@ -1,7 +1,5 @@
 # **Kelompok 6 – Website Kasir Kedai Takosai**
 
-:----
-
 Repository ini berisi dokumentasi dan hasil pengembangan **Website Kasir Kedai Takosai**,
 
 yaitu sistem informasi *Point of Sales* (POS) berbasis web yang dibuat sebagai bagian dari tugas mata kuliah
@@ -14,6 +12,7 @@ mengelola stok menu (Takoyaki & Dimsum), memproses pembayaran (Cash/QRIS),
 
 serta menyajikan laporan penjualan otomatis untuk pemilik usaha.
 
+
 ## **👥 Anggota Kelompok dan Peran** 
 
 | Nama | NPM | Peran |
@@ -23,15 +22,18 @@ serta menyajikan laporan penjualan otomatis untuk pemilik usaha.
 | **Daniela Costantina P.** | 10122324 | Programmer |
 | **Voni Febriyanti Helena** | 11122463 | Designer |
 
+
 ## **🌐 Link Website**
 
 🔗 **Website Kasir Kedai Takosai (Live)** https://kedaitakosai.infinityfreeapp.com/
+
 
 ## **📂 Struktur Repository**
 
 Repository ini menyimpan dokumen dan file proyek yang dikelompokkan berdasarkan
 
 peran masing-masing anggota dalam pengembangan sistem.
+
 
 ### **🔹 Project Manager (PM)**
 
@@ -44,6 +46,7 @@ peran masing-masing anggota dalam pengembangan sistem.
 * Video Presentasi Perencanaan Proyek  
 * Laporan Akhir & Berita Acara Serah Terima (BAST)
 
+
 ### **🔹 System Analyst (SA)**
 
 * Business Process Model and Notation (BPMN)  
@@ -52,6 +55,7 @@ peran masing-masing anggota dalam pengembangan sistem.
 * Dokumen User Acceptance Test (UAT)  
 * Analisis Sistem Berjalan & Usulan
 
+
 ### **🔹 Designer**
 
 * Software Design Document (SDD) (Versi 1.0 \- 1.4 Final)  
@@ -59,6 +63,7 @@ peran masing-masing anggota dalam pengembangan sistem.
 * Video Presentasi Prototype (Tahap 1 & 2\)  
 * User Manual (Buku Panduan Penggunaan)  
 * Video Tutorial Penggunaan Website
+
 
 ### **🔹 Programmer**
 
@@ -72,6 +77,7 @@ File yang diunggah sebelumnya tetap dipertahankan untuk menunjukkan
 
 proses (history) dan waktu pengerjaan proyek dari awal hingga akhir.
 
+
 ## **🛠️ Teknologi yang Digunakan**
 
 * **Frontend:** HTML5, CSS3, Bootstrap 4, JavaScript (jQuery)  
@@ -79,6 +85,7 @@ proses (history) dan waktu pengerjaan proyek dari awal hingga akhir.
 * **Database:** MySQL / MariaDB  
 * **Server:** Apache (XAMPP Local / InfinityFree Cloud)  
 * **Tools:** Visual Studio Code, FileZilla, phpMyAdmin
+
 
 ## **📌 Catatan**
 
