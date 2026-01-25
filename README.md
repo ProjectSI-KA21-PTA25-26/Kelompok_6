@@ -1,5 +1,7 @@
 # **Kelompok 6 – Website Kasir Kedai Takosai**
 
+:----
+
 Repository ini berisi dokumentasi dan hasil pengembangan **Website Kasir Kedai Takosai**,
 
 yaitu sistem informasi *Point of Sales* (POS) berbasis web yang dibuat sebagai bagian dari tugas mata kuliah
